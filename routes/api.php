@@ -37,3 +37,6 @@ Route::resource('questions', App\Http\Controllers\API\QuestionAPIController::cla
 Route::get("questions/get_question_answers/{content_id}", [App\Http\Controllers\API\QuestionAPIController::class, "getQuestionAnswer"]);
 Route::post("questions/check_answer", [App\Http\Controllers\API\QuestionAPIController::class, "checkAnswer"]);
 
+
+
+Route::resource('badge_settings', App\Http\Controllers\API\BadgeSettingAPIController::class);

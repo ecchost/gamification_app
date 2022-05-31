@@ -49,3 +49,5 @@ new Vue({
         console.log("hallo");
     }
 })
+
+var editor = new Quill("#qeditor");

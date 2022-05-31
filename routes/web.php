@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::resource('contents', App\Http\Controllers\Admin\ContentController::class);
     Route::resource('questions', App\Http\Controllers\Admin\QuestionController::class);
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+    Route::resource('badgeSettings', \App\Http\Controllers\Admin\BadgeSettingController::class);
 });
 
 Route::group(['middleware' => ["auth"]], function(){
@@ -52,3 +54,4 @@ Route::post(
     'generator_builder/generate-from-file',
     '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
 )->name('io_generator_builder_generate_from_file');
+

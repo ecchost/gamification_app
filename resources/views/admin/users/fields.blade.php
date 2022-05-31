@@ -5,11 +5,8 @@
 
 <div class="form-group col-sm-6">
 {!! Form::label('role', 'Role:') !!}
-      <select name="role_id" class="form-control" id="role">
-            @foreach($roles as $id => $role)
-                <option value="{{ $id }}">{{ $role }}</option>
-            @endforeach
-      </select>
+    {!! Form::select('role_id', $roles, null, ['class' => 'form-control']) !!}
+
 </div>
 
 <div class="form-group col-sm-6">
@@ -19,7 +16,7 @@
 
 <div class="form-group col-sm-6">
   {!! Form::label('password', 'Password:') !!}
-  {!! Form::text('password', null, ['class' => 'form-control']) !!}
+  {!! Form::text('password', null, ['class' => 'form-control', "type"=> "password"]) !!}
 </div>
 <!-- Submit Field -->
 <div class="form-group col-sm-12">

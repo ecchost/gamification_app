@@ -25,8 +25,20 @@
                           <a class="nav-link" href="">Point: 0</a>
                       </li>
                       <li><hr class="dropdown-divider" /> </li>
+                      @if(\Illuminate\Support\Facades\Auth::user()->role_id == 1)
                       <li class="nav-item">
-                          <a class="nav-link" href="">Logout</a>
+                          <a href="{{ route("admin.dashboard") }}" class="nav-link">Goto Admin</a>
+                      </li>
+                      @endif
+                      <br />
+                      <li class="nav-item">
+                          <div class="nav-link">
+                              {!! Form::open(["route"=>"logout","method"=>"POST"]) !!}
+                              @csrf
+                              <button class="btn btn-danger btn-block">Logout <i class="fa fa-unlock"></i> </button>
+                              {!!Form::close() !!}
+                          </div>
+
                       </li>
                   </ul>
               </li>

@@ -1,7 +1,11 @@
 @extends('layouts.front')
 
 @section('content')
-  <section class="section">
+    @if(Session::has('msg_error'))
+        <div class="alert alert-warning">{{ Session::get("msg_error") }}</div>
+    @endif
+
+    <section class="section">
     <div class="section-body">
       <h2 class="section-title">Take Your Lesson now</h2>
       <p class="section-lead">

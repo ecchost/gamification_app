@@ -31773,6 +31773,7 @@ new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_0___default())({
     console.log("hallo");
   }
 });
+var editor = new Quill("#qeditor");
 })();
 
 /******/ })()

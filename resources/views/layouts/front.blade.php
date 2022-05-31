@@ -14,6 +14,8 @@
   <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('assets/stisla/css/style.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/stisla/css/components.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/quill.snow.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
   <title>Gamification</title>
 </head>
 
@@ -39,6 +41,10 @@
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
 <script src="{{ asset('assets/stisla/js/stisla.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="{{ asset('js/quill/quill.js') }}"></script>
+
 <script src="{{ mix('js/app.js') }}"></script>
 
+@yield("scripts")
 </html>
