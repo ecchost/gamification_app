@@ -31754,10 +31754,12 @@ new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_0___default())({
         this.user_answers[qIndex] = value;
       }
     },
-    checkAnswer: function checkAnswer() {
+    checkAnswer: function checkAnswer(uid) {
+      var user_id = uid;
       fetch("/api/questions/check_answer/", {
         method: "POST",
         body: JSON.stringify({
+          user_id: user_id,
           content_id: this.content.id,
           answer_ids: this.user_answers
         })

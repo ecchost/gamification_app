@@ -32,10 +32,12 @@ new Vue({
                 this.user_answers[qIndex] = value
             }
         },
-        checkAnswer(){
+        checkAnswer(uid){
+            let user_id = uid;
             fetch("/api/questions/check_answer/",{
                 method: "POST",
                 body: JSON.stringify({
+                    user_id: user_id,
                     content_id: this.content.id,
                     answer_ids: this.user_answers,
                 })

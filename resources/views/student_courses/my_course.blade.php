@@ -39,7 +39,7 @@
                                     </div>
                                     <br />
                                 </div><br />
-                                <button class="btn btn-primary" v-on:click="checkAnswer">Finish</button>
+                                <button class="btn btn-primary" v-on:click="checkAnswer({{\Illuminate\Support\Facades\Auth::id()}})">Finish</button>
                             </div>
 
                         </div>
