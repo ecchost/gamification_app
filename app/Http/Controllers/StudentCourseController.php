@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use App\Models\Course;
 use App\Models\StudentCourse;
+use App\Models\UserScore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -38,8 +40,11 @@ class StudentCourseController extends Controller
         }
     }
 
-    public function my_course($course_id){
+    public function my_course($course_id, $content_id = null){
         $course = Course::find($course_id);
-        return view("student_courses.my_course", ["course"=>$course]);
+        $contents = $content_id != null ? Content::find($content_id): null;
+        $user_score = UserScore::where("content_id", $content_id)->first();
+        $total_score = UserScore::where("user_id", Auth::id())->sum("score");
+        return view("student_courses.my_course", ["course"=>$course, "content"=>$contents, "score"=>$user_score, "total_score"=> $total_score]);
     }
 }

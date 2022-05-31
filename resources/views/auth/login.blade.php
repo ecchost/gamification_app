@@ -24,7 +24,7 @@
                            class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
                            placeholder="Enter Email" tabindex="1"
                            value="{{ (Cookie::get('email') !== null) ? Cookie::get('email') : old('email') }}" autofocus
-                           required>
+                           required v-model="email">
                     <div class="invalid-feedback">
                         {{ $errors->first('email') }}
                     </div>
@@ -43,7 +43,9 @@
                            value="{{ (Cookie::get('password') !== null) ? Cookie::get('password') : null }}"
                            placeholder="Enter Password"
                            class="form-control{{ $errors->has('password') ? ' is-invalid': '' }}" name="password"
-                           tabindex="2" required>
+                           tabindex="2" required
+                           v-model="password"
+                    >
                     <div class="invalid-feedback">
                         {{ $errors->first('password') }}
                     </div>
@@ -58,7 +60,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" v-on:click="login(email, password)">
                         Login
                     </button>
                 </div>

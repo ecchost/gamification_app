@@ -31722,7 +31722,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_0___default())({
-  el: "#app",
+  el: "#interactive",
   data: function data() {
     return {
       content: {
@@ -31748,28 +31748,29 @@ new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_0___default())({
       });
     },
     changeAnswer: function changeAnswer(qIndex, value) {
-      if (this.user_answers[qIndex] === undefined) {
-        this.user_answers.push(value);
-      } else {
-        this.user_answers[qIndex] = value;
-      }
+      this.user_answers[qIndex] = value;
+      console.log(this.user_answers);
     },
-    checkAnswer: function checkAnswer(uid) {
+    checkAnswer: function checkAnswer(uid, content_id) {
       var user_id = uid;
       fetch("/api/questions/check_answer/", {
         method: "POST",
         body: JSON.stringify({
           user_id: user_id,
-          content_id: this.content.id,
+          content_id: content_id,
           answer_ids: this.user_answers
         })
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        if (data.success) {//window.location.reload();
+        if (data.success) {
+          window.location.reload();
         }
       });
     }
+  },
+  mounted: function mounted() {
+    console.log("hallo");
   }
 });
 })();

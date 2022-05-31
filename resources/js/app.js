@@ -3,7 +3,7 @@ require('./bootstrap');
 import Vue from 'vue/dist/vue.js';
 
 new Vue({
-    el: "#app",
+    el: "#interactive",
     data(){
       return {
           content: {
@@ -26,26 +26,26 @@ new Vue({
             })
         },
         changeAnswer(qIndex, value){
-            if(this.user_answers[qIndex] === undefined){
-                this.user_answers.push(value);
-            } else {
-                this.user_answers[qIndex] = value
-            }
+            this.user_answers[qIndex] = value
+            console.log(this.user_answers)
         },
-        checkAnswer(uid){
+        checkAnswer(uid, content_id){
             let user_id = uid;
             fetch("/api/questions/check_answer/",{
                 method: "POST",
                 body: JSON.stringify({
                     user_id: user_id,
-                    content_id: this.content.id,
+                    content_id: content_id,
                     answer_ids: this.user_answers,
                 })
             }).then(res => res.json()).then(data => {
                 if(data.success){
-                    //window.location.reload();
+                    window.location.reload();
                 }
             })
         }
     },
+    mounted() {
+        console.log("hallo");
+    }
 })

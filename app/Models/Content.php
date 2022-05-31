@@ -24,7 +24,7 @@ class Content extends Model
 
 
     public $table = 'contents';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -58,7 +58,7 @@ class Content extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
     /**
@@ -67,5 +67,9 @@ class Content extends Model
     public function lesson()
     {
         return $this->belongsTo(\App\Models\lesson::class, 'lesson_id');
+    }
+
+    public function questions(){
+        return $this->hasMany(Question::class);
     }
 }

@@ -68,7 +68,10 @@ class QuestionAPIController extends AppBaseController
                 }
             }
 
-            //$user_score = UserScore::where("user_id", $da)
+            $user_score = UserScore::where("user_id", $data["user_id"]);
+            //if($user_score->count() == 0){
+                UserScore::create(["user_id"=> $data["user_id"], "content_id" => $data["content_id"], "score" => $score ]);
+            //}
             return $this->sendResponse(["score"=>$score], "success");
         //}
 

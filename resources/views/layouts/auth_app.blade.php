@@ -48,6 +48,7 @@
 <!-- Template JS File -->
 <script src="{{ asset('web/js/stisla.js') }}"></script>
 <script src="{{ asset('web/js/scripts.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 <!-- Page Specific JS File -->
 </body>
 </html>
