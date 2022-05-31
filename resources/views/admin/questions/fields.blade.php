@@ -30,10 +30,11 @@
     <div class="row">
         @for($i=0; $i<4; $i++)
             <div class="col-sm-10">
-                <textarea class="form-control" rows="3" name="answers_{{$i}}" placeholder="Answer {{$i+1}}"></textarea>
+                <textarea class="form-control" rows="3" name="answers_{{$i}}" placeholder="Answer {{$i+1}}">{{ $answers[$i]->answer }}</textarea>
             </div>
             <div class="col-md-2">
-                <input type="checkbox" value="true" name="is_right_{{$i}}"> is right?
+                <input type="hidden" name="answer_id_{{$i}}" value="{{ $answers[$i]->id }}">
+                <input type="checkbox" value="true" name="is_right_{{$i}}" {{ $answers[$i]->is_right == "true" ? "checked": "" }}> is right?
             </div>
             <div class="form-divider"></div>
         @endfor

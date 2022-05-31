@@ -56,11 +56,16 @@ class QuestionController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateQuestionRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 
         $question = $this->questionRepository->create($input);
+        for($i=0; $i<4; $i++){
+            $ans = $request["answers_$i"];
+            $is_r = @$request["is_right_$i"];
+            Answer::create(["question_id"=>$question->id, "answer"=>$ans, "is_right" => $is_r]);
+        }
 
         Flash::success('Question saved successfully.');
 
@@ -99,7 +104,6 @@ class QuestionController extends AppBaseController
         $question = $this->questionRepository->find($id);
 
         $contents = Content::all()->pluck("title", "id");
-
         if (empty($question)) {
             Flash::error('Question not found');
 
@@ -133,10 +137,25 @@ class QuestionController extends AppBaseController
             for($i=0; $i<4; $i++){
                 $ans = $request["answers_$i"];
                 $is_r = @$request["is_right_$i"];
-                Answer::create(["question_id"=>$question->id, "answer"=>$ans, "is_right" => $is_r]);
+                $id_ans = @$request["answer_id_$i"];
+
+                Answer::create(["question_id" => $question->id, "answer" => $ans, "is_right" => $is_r]);
+            }
+        } else {
+            for($i=0; $i<4; $i++){
+                $ans = $request["answers_$i"];
+                $is_r = @$request["is_right_$i"];
+                $id_ans = @$request["answer_id_$i"];
+                if(empty($id_ans)) {
+                    Answer::create(["question_id" => $question->id, "answer" => $ans, "is_right" => $is_r]);
+                } else {
+                    $answ = Answer::find((int) $id_ans);
+                    $answ->update(["question_id" => $question->id, "answer" => $ans, "is_right" => $is_r]);
+                }
             }
         }
         Flash::success('Question updated successfully.');
+        Log::debug($request->all());
 
         return redirect(route('admin.questions.index'));
     }
