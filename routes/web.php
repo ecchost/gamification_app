@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::resource('lessons', App\Http\Controllers\Admin\lessonController::class);
     Route::resource('contents', App\Http\Controllers\Admin\ContentController::class);
     Route::resource('questions', App\Http\Controllers\Admin\QuestionController::class);
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 });
 
 Route::group(['middleware' => ["auth"]], function(){

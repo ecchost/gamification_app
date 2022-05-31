@@ -20,3 +20,6 @@
 <li class="{{ Request::is('questions*') ? 'active' : '' }}">
   <a href="{{ route('admin.questions.index') }}"><i class="fa fa-edit"></i><span>Questions</span></a>
 </li>
+<li class="{{ Request::is('questions*') ? 'active' : '' }}">
+  <a href="{{ route('admin.users.index') }}"><i class="fa fa-edit"></i><span>Users</span></a>
+</li>

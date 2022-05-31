@@ -18,7 +18,7 @@ class Role extends Model
 
 
     public $table = 'roles';
-    
+
 
 
 
@@ -41,9 +41,7 @@ class Role extends Model
      *
      * @var array
      */
-    public static $rules = [
-        
-    ];
+    public static $rules = [];
 
-    
+
 }
