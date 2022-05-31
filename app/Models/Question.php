@@ -66,7 +66,7 @@ class Question extends Model
         return $this->belongsTo(\App\Models\Content::class, 'content_id');
     }
 
-    public function  answers(){
+    public function answers(){
         return $this->hasMany(\App\Models\Answer::class);
     }
 }

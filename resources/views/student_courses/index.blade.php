@@ -6,7 +6,8 @@
             <h2 class="section-title">Take Your Lesson now</h2>
             <p class="section-lead">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam.
+                magna aliqua. Ut enim ad minim veniam.<br />
+
             </p>
             <!-- Your content goes here -->
         </div>
@@ -31,7 +32,7 @@
 
                         <!-- card footer -->
                         <div class="card-footer">
-                            <button class="btn btn-primary btn-block"><i class="fa fa-play"></i> Start Lesson</button>
+                            <a href="{{ route("student_course.my_course.detail", $course->id) }}" class="btn btn-primary btn-block"><i class="fa fa-play"></i> Start Lesson</a>
                         </div>
                     </div>
                 </div>

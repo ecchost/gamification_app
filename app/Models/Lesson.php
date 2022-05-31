@@ -63,4 +63,8 @@ class Lesson extends Model
     {
         return $this->belongsTo(\App\Models\Course::class, 'course_id');
     }
+
+    public function contents(){
+        return $this->hasMany(Content::class);
+    }
 }

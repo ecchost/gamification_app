@@ -46,7 +46,7 @@ class QuestionController extends AppBaseController
     public function create()
     {
         $contents = Content::all()->pluck("title", "id");
-        return view('admin.questions.create', ["contents" => $contents]);
+        return view('admin.questions.create', ["contents" => $contents, "answers"=>[]]);
     }
 
     /**

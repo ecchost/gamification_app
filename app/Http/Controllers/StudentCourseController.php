@@ -37,4 +37,9 @@ class StudentCourseController extends Controller
             }
         }
     }
+
+    public function my_course($course_id){
+        $course = Course::find($course_id);
+        return view("student_courses.my_course", ["course"=>$course]);
+    }
 }

@@ -4,11 +4,16 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateQuestionAPIRequest;
 use App\Http\Requests\API\UpdateQuestionAPIRequest;
+use App\Models\Answer;
 use App\Models\Question;
+use App\Models\UserScore;
 use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Response;
+use function MongoDB\BSON\toJSON;
 
 /**
  * Class QuestionController
@@ -43,6 +48,31 @@ class QuestionAPIController extends AppBaseController
         return $this->sendResponse($questions->toArray(), 'Questions retrieved successfully');
     }
 
+    public function getQuestionAnswer($content_id){
+        $qa = Question::where("content_id", $content_id)->with("answers")->get();
+        return $this->sendResponse([
+            ...$qa->toArray(),
+        ], "success");
+    }
+
+    public function checkAnswer(Request $request){
+        //if(Auth::check()){
+            $score = 0;
+            $data = json_decode($request->getContent(), true);
+            foreach ($data["answer_ids"] as $ans){
+                $answer = Answer::find($ans);
+                $is_right = (bool) $answer->is_right;
+                if($is_right){
+                    $get_score = $answer->question->score;
+                    $score+=$get_score;
+                }
+            }
+
+            //$user_score = UserScore::where("user_id", $da)
+            return $this->sendResponse(["score"=>$score], "success");
+        //}
+
+    }
     /**
      * Store a newly created Question in storage.
      * POST /questions

@@ -18,7 +18,7 @@
 </head>
 
 <body>
-  <div class="app">
+  <div id="app">
     <div class="main-wrapper">
       @include('layouts.front_navbar')
 
@@ -39,5 +39,6 @@
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
 <script src="{{ asset('assets/stisla/js/stisla.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 
 </html>
