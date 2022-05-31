@@ -12,8 +12,7 @@
                     @if($content!= null)
                     <h2 class="section-title">{{ $content->title }}</h2>
                     <p class="section-lead">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam.
+                        {{$content->description}}
                     </p>
                     <!-- Your content goes here -->
 
