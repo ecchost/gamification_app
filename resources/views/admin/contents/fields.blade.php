@@ -58,7 +58,7 @@
 
         </div>
         <div id="editor">
-            {!! $content->description !!}
+            {!! @$content->description !!}
         </div>
     </div>
 </div>
