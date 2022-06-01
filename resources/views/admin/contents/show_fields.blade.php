@@ -13,13 +13,7 @@
 <!-- Lesson Id Field -->
 <div class="form-group">
     {!! Form::label('lesson_id', 'Lesson Id:') !!}
-    <p>{{ $content->lesson_id }}</p>
-</div>
-
-<!-- Description Field -->
-<div class="form-group">
-    {!! Form::label('description', 'Description:') !!}
-    <p>{{ $content->description }}</p>
+    <p>{{ $content->lesson->title }}</p>
 </div>
 
 <!-- Url Video Field -->
@@ -44,5 +38,11 @@
 <div class="form-group">
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{{ $content->updated_at }}</p>
+</div>
+
+<!-- Description Field -->
+<div class="form-group">
+    {!! Form::label('description', 'Description:') !!}
+    <p>{!! $content->description !!} </p>
 </div>
 

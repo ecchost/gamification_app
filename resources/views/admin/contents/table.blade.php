@@ -4,7 +4,6 @@
       <tr>
         <th>Title</th>
         <th>Lesson</th>
-        <th>Description</th>
         <th>Url Video</th>
         <th>Published</th>
         <th colspan="3">Action</th>
@@ -15,7 +14,6 @@
         <tr>
           <td>{{ $content->title }}</td>
           <td>{{ $content->lesson->title }}</td>
-          <td>{{ $content->description }}</td>
           <td>{{ $content->url_video }}</td>
           <td>{{ $content->published }}</td>
           <td class=" text-center">

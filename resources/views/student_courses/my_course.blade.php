@@ -36,7 +36,7 @@
                     @if($content!= null)
                     <h2 class="section-title">{{ $content->title }}</h2>
                     <div class="section-lead">
-                        <div id="res">{!! $content->description !!}</div>
+                        <div>{!! $content->description !!}</div>
                         <br /><br />
                     </div>
                     <!-- Your content goes here -->
@@ -132,23 +132,3 @@
     </section>
 @endsection
 
-@section("scripts")
-    <script type="text/javascript">
-        hljs.configure({   // optionally configure hljs
-            languages: ['javascript', 'ruby', 'python', 'java']
-        });
-
-        var quill = new Quill('#res', {
-            modules: {
-                syntax: true,
-                toolbar: false
-            },
-            theme: 'snow',
-            onChange:(value) => {
-                console.log(value)
-            },
-            readOnly:true
-        });
-
-    </script>
-@endsection
