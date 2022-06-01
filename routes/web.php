@@ -38,6 +38,7 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::post("/take_course", [\App\Http\Controllers\StudentCourseController::class, "takeCourse"])->name("student_course.take");
     Route::get("/courses/my_course/{course_id}", [\App\Http\Controllers\StudentCourseController::class, "my_course"])->name("student_course.my_course.detail");
     Route::get("/courses/my_course/{course_id}/detail/{content_id?}", [\App\Http\Controllers\StudentCourseController::class, "my_course"])->name("student_course.my_course.detail.content");
+    Route::get("/courses/detail/{course_id}", [\App\Http\Controllers\StudentCourseController::class, "detail"])->name("student_course.detail");
 });
 
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');

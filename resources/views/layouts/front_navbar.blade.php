@@ -22,7 +22,7 @@
                   </a>
                   <ul class="dropdown-menu">
                       <li class="nav-item">
-                          <a class="nav-link" href="">Point: 0</a>
+                          <a class="nav-link" href="">Total Score: <b>{{ \App\Models\UserScore::getScore() }}</b></a>
                       </li>
                       <li><hr class="dropdown-divider" /> </li>
                       @if(\Illuminate\Support\Facades\Auth::user()->role_id == 1)

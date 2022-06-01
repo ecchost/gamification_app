@@ -35,11 +35,20 @@
 
                       <!-- card footer -->
                       <div class="card-footer">
-                           {!! Form::open(["route"=>"student_course.take", "method"=> "POST"]) !!}
-                          @csrf
-                          {!! Form::hidden('course_id', $course->id) !!}
-                          <button class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Take</button>
-                          {!! Form::close() !!}
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <a href="{{ route("student_course.detail", [$course->id]) }}" class="btn btn-grey btn-block">See Detail</a>
+                              </div>
+                              <div class="col-md-6">
+                                  {!! Form::open(["route"=>"student_course.take", "method"=> "POST"]) !!}
+                                  @csrf
+                                  {!! Form::hidden('course_id', $course->id) !!}
+                                  <button class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Take</button>
+                                  {!! Form::close() !!}
+                              </div>
+                          </div>
+
+
                       </div>
                   </div>
               </div>
