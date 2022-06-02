@@ -54,6 +54,7 @@
             <!-- Add subscript and superscript buttons -->
             <button class="ql-script" value="sub"></button>
             <button class="ql-script" value="super"></button>
+            <button class="ql-image"></button>
             <button class="ql-code-block"></button>
 
         </div>

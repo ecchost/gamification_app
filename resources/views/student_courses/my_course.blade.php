@@ -117,10 +117,7 @@
                                                     {{ $content->title }}</a>
                                             @endforeach
                                         </div>
-
                                     </div>
-
-
                                 </div>
                             </div>
                             @endforeach
