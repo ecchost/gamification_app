@@ -53,6 +53,54 @@
                   </div>
               </div>
           @endforeach
+          <div class="row">
+    <div class="col-12">
+        <div class="callout callout-danger">
+            <h5><i class="fas fa-info"></i> JUnit Result</h5>
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>System</th>
+                                <th style="width: 10px margin:fit-content">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>Upload Java file</td>
+                                <td><span class="badge bg-success">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php $outjava = shell_exec('java -version ' . ' 2>&1');
+                                    echo '<pre>' . $outjava . '</pre>';
+
+                                    ?>
+                                <td>
+
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>JUnit Testing</td>
+                                <td><span class="badge bg-warning">Failed</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <?php
+
+                                $javashout1 = shell_exec("cd datajava && java -cp junit-4.12.jar:hamcrest-core-1.3.jar:. org.junit.runner.JUnitCore JUnitHelloWorldTest");
+                                echo '<pre>' . $javashout1 . '</pre>';
+
+                                ?>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
       </div>
 
   </section>

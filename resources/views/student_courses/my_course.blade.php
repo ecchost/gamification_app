@@ -39,7 +39,8 @@
 
                 <div>
                     <div class="card" style="height: 450px">
-
+<iframe width="auto" height="450px" src="https://www.youtube.com/embed/eIrMbAQSU34"
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     @if($content!= null)
                         <h2 class="section-title">{{ $content->title }}</h2>
@@ -88,7 +89,6 @@
                                 </div>
                             </div>
                         @endif
-
 
                         @if(sizeof($code_tests)!=0)
                             <div class="card">
