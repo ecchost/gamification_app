@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BadgeSetting;
 use App\Models\Content;
 use App\Models\Course;
+use App\Models\Question;
 use App\Models\StudentCourse;
 use App\Models\UserScore;
 use Illuminate\Http\Request;
@@ -69,6 +70,8 @@ class StudentCourseController extends Controller
         $total_score = UserScore::where("user_id", Auth::id())->sum("score");
         $active_lesson = $content_id != null ? Content::find($content_id)->lesson : $course->lessons->first();
         $current_badge = BadgeSetting::where("min", "<=",$total_score)->where("max",">=", $total_score)->first();
+        $questions = Question::where(["is_essay"=>"0", "content_id" => $content_id])->get();
+        $code_test = Question::where(["is_essay"=>"1", "content_id" => $content_id])->get();
 
         return view("student_courses.my_course", [
             "course"=>$course,
@@ -77,7 +80,9 @@ class StudentCourseController extends Controller
             "total_score"=> $total_score,
             "active_lesson"=> $active_lesson,
             "active_content" => $contents,
-            "current_badge" => $current_badge
+            "current_badge" => $current_badge,
+            "questions"=>$questions,
+            "code_tests"=>$code_test,
         ]);
     }
 }
