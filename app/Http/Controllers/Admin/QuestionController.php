@@ -59,13 +59,15 @@ class QuestionController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-
         $question = $this->questionRepository->create($input);
-        for($i=0; $i<4; $i++){
-            $ans = $request["answers_$i"];
-            $is_r = @$request["is_right_$i"];
-            Answer::create(["question_id"=>$question->id, "answer"=>$ans, "is_right" => $is_r]);
+        if($request['is_essay']!='1'){
+            for($i=0; $i<4; $i++){
+                $ans = $request["answers_$i"];
+                $is_r = @$request["is_right_$i"];
+                Answer::create(["question_id"=>$question->id, "answer"=>$ans, "is_right" => $is_r]);
+            }
         }
+
 
         Flash::success('Question saved successfully.');
 
@@ -133,26 +135,29 @@ class QuestionController extends AppBaseController
         $question = $this->questionRepository->update($request->all(), $id);
 
         $answers = $question->answers;
-        if($answers->count()== 0){
-            for($i=0; $i<4; $i++){
-                $ans = $request["answers_$i"];
-                $is_r = @$request["is_right_$i"];
-                $id_ans = @$request["answer_id_$i"];
+        if($request['is_essay']!='1') {
+            if ($answers->count() == 0) {
+                for ($i = 0; $i < 4; $i++) {
+                    $ans = $request["answers_$i"];
+                    $is_r = @$request["is_right_$i"];
 
-                Answer::create(["question_id" => $question->id, "answer" => $ans, "is_right" => $is_r]);
-            }
-        } else {
-            for($i=0; $i<4; $i++){
-                $ans = $request["answers_$i"];
-                $is_r = @$request["is_right_$i"];
-                $id_ans = @$request["answer_id_$i"];
-                if(empty($id_ans)) {
                     Answer::create(["question_id" => $question->id, "answer" => $ans, "is_right" => $is_r]);
-                } else {
-                    $answ = Answer::find((int) $id_ans);
-                    $answ->update(["question_id" => $question->id, "answer" => $ans, "is_right" => $is_r]);
+                }
+            } else {
+                for ($i = 0; $i < 4; $i++) {
+                    $ans = $request["answers_$i"];
+                    $is_r = @$request["is_right_$i"];
+                    $id_ans = @$request["answer_id_$i"];
+                    if (empty($id_ans)) {
+                        Answer::create(["question_id" => $question->id, "answer" => $ans, "is_right" => $is_r]);
+                    } else {
+                        $answ = Answer::find((int)$id_ans);
+                        $answ->update(["question_id" => $question->id, "answer" => $ans, "is_right" => $is_r]);
+                    }
                 }
             }
+        } else {
+            $question = $this->questionRepository->update(["is_essay" => 1], $id);
         }
         Flash::success('Question updated successfully.');
         Log::debug($request->all());

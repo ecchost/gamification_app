@@ -33,7 +33,8 @@ class Question extends Model
         'content_id',
         'question',
         'image',
-        'score'
+        'score',
+        'is_essay'
     ];
 
     /**
@@ -46,7 +47,8 @@ class Question extends Model
         'content_id' => 'integer',
         'question' => 'string',
         'image' => 'string',
-        'score' => 'integer'
+        'score' => 'integer',
+        'is_essay' => 'integer'
     ];
 
     /**
