@@ -32,6 +32,12 @@
             background: #f3f3f3;
             margin-top: 10px;
         }
+
+        .code-editor-wrapper{
+            height: 300px;
+        }
+
+
     </style>
     <section class="section mt-5" id="interactive">
         <div class="row">
@@ -99,12 +105,20 @@
                                     @foreach($code_tests as $index=>$question)
                                         <div>
                                             {!! $question->question !!}
+                                            <a href="{{ route("code_test", ["question_id"=>$question->id]) }}" class="btn btn-primary">Lest Test</a>
+{{--                                            <br><hr />--}}
+{{--                                            <b>write your answer</b>--}}
+{{--                                            <button class="btn btn-primary" onclick="runCode('{{ 'sc'.$index }}')">Run</button>--}}
+{{--                                            <div class="code-editor-wrapper">--}}
+{{--                                                <div id="sc{{$index}}" class="editor"></div>--}}
+{{--                                                <br clear="all" />--}}
+{{--                                            </div>--}}
 
-                                            <br><hr />
-                                            <b>write your answer</b>
-                                            <pre id="sc{{$index}}" contenteditable="true" class="code-editor ql-syntax" spellcheck="true" onpaste="return false">//write your code</pre>
-                                            <br />
-                                            <button class="btn btn-primary" onclick="runCode('{{ 'sc'.$index }}')">Run</button>
+{{--                                            <br clear="all" />--}}
+
+{{--                                            <br /><br />--}}
+{{--                                            Output<br />--}}
+{{--                                            <pre class="code-editor" id="output_sc{{$index}}"></pre>--}}
                                         </div>
                                     @endforeach
                                 </div>
@@ -171,22 +185,31 @@
 @endsection
 
 @section("scripts")
+    <script src="{{ asset("js/prism.js") }}"></script>
+    <script src="{{ asset("js/codeflask.min.js") }}"></script>
 <script>
+    const flask = new CodeFlask('.editor', {
+        language: 'js',
+        lineNumbers: true,
+        handleTabs: true,
+    });
+
+    flask.addLanguage('java', Prism.languages['java']);
+
+
     function runCode(id){
         console.log("running");
-        var codes = ($('#'+id).text());
-        var to_compile = {
-            "LanguageChoice": "12",
-            "Program": codes,
-            "Input": "",
-            "CompilerArgs" : ""
+        //let codes = ($('#'+id).text());
+        let to_compile = {
+            "code": flask.getCode(),
+            "user": '{{\Illuminate\Support\Facades\Auth::user()->email}}',
         };
         $.ajax ({
-            url: "https://rextester.com/rundotnet/api",
+            url: "http://localhost:8000/compiler/run",
             type: "POST",
             data: to_compile
         }).done(function(data) {
-            alert(JSON.stringify(data));
+            $('#output_'+id).text( `${data.output.java}\n${data.output.test_output}`);
         }).fail(function(data, err) {
             alert("fail " + JSON.stringify(data) + " " + JSON.stringify(err));
         });

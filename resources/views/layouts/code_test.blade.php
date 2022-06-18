@@ -23,14 +23,11 @@
 <body>
   <div id="app">
     <div class="main-wrapper">
-      @include('layouts.front_navbar')
-
-      <div class="main-content">
-        <div class="container">
+      @include('layouts.code_tets_navbar')
+        <div>
           @yield('content')
         </div>
 
-      </div>
     </div>
   </div>
 </body>
@@ -42,9 +39,6 @@
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
 <script src="{{ asset('assets/stisla/js/stisla.js') }}"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="{{ asset('js/quill/quill.js') }}"></script>
-
 <script src="{{ mix('js/app.js') }}"></script>
 
 @yield("scripts")
