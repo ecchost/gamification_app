@@ -60,6 +60,7 @@
                 data: to_compile
             }).done(function(data) {
                 $('#output').text( `${data.output.java}\n${data.output.test_output}`);
+                $('#score').val(data.output.point || 0);
             }).fail(function(data, err) {
                 alert("fail " + JSON.stringify(data) + " " + JSON.stringify(err));
             });
