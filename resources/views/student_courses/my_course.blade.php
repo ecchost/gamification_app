@@ -49,11 +49,15 @@
 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     @if($content!= null)
+                    <div class="card">
+                        <div class="card-body">
                         <h2 class="section-title">{{ $content->title }}</h2>
                         <div class="section-lead">
                             <div>{!! $content->description !!}</div>
                             <br/><br/>
                         </div>
+                      </div>
+                    </div>
                         <!-- Your content goes here -->
 
                         @if(sizeof($questions)!=0 && empty($score))
@@ -140,7 +144,7 @@ title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; cli
                     <div class="card-body">
                         <h5 class="card-title"><i class="fa fa-medal text-primary"></i> Total Score: {{ $total_score }}
                         </h5>
-                        <div class="alert alert-info">
+                        <div class="alert alert-success">
                             Your Badge is <b>{{ $current_badge->name }}</b>
                         </div>
                     </div>
@@ -167,7 +171,7 @@ title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; cli
                                                 @foreach($lesson->contents as $content)
                                                     <a href="{{ route("student_course.my_course.detail.content", [$course->id, $content->id]) }}"
                                                        type="button"
-                                                       class="list-group-item list-group-item-action {{ $content->id == $active_content->id ? "active" : "" }}"
+                                                       class="list-group-item list-group-item-action {{ $content->id == $active_content->id ? "active bg-info" : "" }}"
                                                     >
                                                         {{ $content->title }}</a>
                                                 @endforeach
