@@ -37,6 +37,11 @@
             height: 300px;
         }
 
+        .list-ac{
+            background: #c4c4c4;
+            color: #0c0c0c;
+        }
+
 
     </style>
     <section class="section mt-5" id="interactive">
@@ -109,7 +114,7 @@ title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; cli
                                     @foreach($code_tests as $index=>$question)
                                         <div>
                                             {!! $question->question !!}
-                                            <a href="{{ route("code_test", ["question_id"=>$question->id]) }}" class="btn btn-primary">Lest Test</a>
+                                            <a href="{{ route("code_test", ["question_id"=>$question->id, "course_id"=>$course->id, 'content_id'=>$content->id]) }}" class="btn btn-primary">Lest Test</a>
 {{--                                            <br><hr />--}}
 {{--                                            <b>write your answer</b>--}}
 {{--                                            <button class="btn btn-primary" onclick="runCode('{{ 'sc'.$index }}')">Run</button>--}}

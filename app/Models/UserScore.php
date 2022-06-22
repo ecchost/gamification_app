@@ -12,7 +12,7 @@ class UserScore extends Model
     use HasFactory;
 
     protected $table = "user_scores";
-    protected $fillable  = ["user_id", "content_id", "score"];
+    protected $fillable  = ["user_id", "content_id", "score", "question_id"];
 
     public static function getScore(){
         $score =  UserScore::where("user_id", Auth::id())->sum("score");
