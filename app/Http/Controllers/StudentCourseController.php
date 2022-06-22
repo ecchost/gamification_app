@@ -85,4 +85,21 @@ class StudentCourseController extends Controller
             "code_tests"=>$code_test,
         ]);
     }
+
+    public function upload_java_file(Request $request){
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $check_course = StudentCourse::where(["user_id"=>$user_id, "course_id" => $request["course_id"]]);
+            if($check_course->count()==0){
+                $student_course = StudentCourse::create(["user_id"=>$user_id, "course_id" => $request["course_id"]]);
+                if($student_course->save()){
+                    return redirect("student_course.my_course");
+                }
+            } else {
+                session()->flash('msg_error', 'You already take it');
+                return redirect()->back();
+            }
+
+        }
+    }
 }
