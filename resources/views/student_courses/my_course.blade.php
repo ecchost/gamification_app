@@ -151,7 +151,15 @@ title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; cli
                         </h5>
                         <div class="alert alert-success">
                             Your Badge is <b>{{ $current_badge->name }}</b>
+                        </div><br />
+
+                        <div>
+                            <b>Your Code Test Progress ({{ $percentage }}%)</b>
+                            <div class="progress mt-2">
+                                <div class="progress-bar" role="progressbar" style="width: {{ $percentage }}%;" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">{{ $percentage }}%</div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="card">

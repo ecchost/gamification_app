@@ -7,6 +7,7 @@ use App\Models\Content;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\StudentCourse;
+use App\Models\User;
 use App\Models\UserScore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,6 +83,7 @@ class StudentCourseController extends Controller
             "current_badge" => $current_badge,
             "questions"=>$questions,
             "code_tests"=>$code_test,
+            "percentage" => UserScore::getPercentage()
         ]);
     }
 }
