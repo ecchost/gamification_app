@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CreateLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
-use App\Repositories\lessonRepository;
+use App\Repositories\LessonRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Course;
 use Illuminate\Http\Request;

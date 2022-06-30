@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreatelessonAPIRequest;
-use App\Http\Requests\API\UpdatelessonAPIRequest;
+use App\Http\Requests\API\CreateLessonAPIRequest;
+use App\Http\Requests\API\UpdateLessonAPIRequest;
 use App\Models\lesson;
-use App\Repositories\lessonRepository;
+use App\Repositories\LessonRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -20,7 +20,7 @@ class lessonAPIController extends AppBaseController
     /** @var  lessonRepository */
     private $lessonRepository;
 
-    public function __construct(lessonRepository $lessonRepo)
+    public function __construct(LessonRepository $lessonRepo)
     {
         $this->lessonRepository = $lessonRepo;
     }
@@ -47,11 +47,11 @@ class lessonAPIController extends AppBaseController
      * Store a newly created lesson in storage.
      * POST /lessons
      *
-     * @param CreatelessonAPIRequest $request
+     * @param CreateLessonAPIRequest $request
      *
      * @return Response
      */
-    public function store(CreatelessonAPIRequest $request)
+    public function store(CreateLessonAPIRequest $request)
     {
         $input = $request->all();
 
@@ -85,11 +85,11 @@ class lessonAPIController extends AppBaseController
      * PUT/PATCH /lessons/{id}
      *
      * @param int $id
-     * @param UpdatelessonAPIRequest $request
+     * @param UpdateLessonAPIRequest $request
      *
      * @return Response
      */
-    public function update($id, UpdatelessonAPIRequest $request)
+    public function update($id, UpdateLessonAPIRequest $request)
     {
         $input = $request->all();
 
