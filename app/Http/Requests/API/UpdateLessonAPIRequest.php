@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\lesson;
+use App\Models\Lesson;
 use InfyOm\Generator\Request\APIRequest;
 
 class UpdateLessonAPIRequest extends APIRequest
