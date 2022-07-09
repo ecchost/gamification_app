@@ -57,19 +57,18 @@ class Content extends Model
      *
      * @var array
      */
-    public static $rules = [
-
-    ];
+    public static $rules = [];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
     public function lesson()
     {
-        return $this->belongsTo(\App\Models\lesson::class, 'lesson_id');
+        return $this->belongsTo(\App\Models\Lesson::class, 'lesson_id');
     }
 
-    public function questions(){
+    public function questions()
+    {
         return $this->hasMany(Question::class);
     }
 }
