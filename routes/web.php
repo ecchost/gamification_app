@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get("/", [App\Http\Controllers\Admin\DashboardController::class, "index"])->name("dashboard");
     Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
     Route::resource('courses', App\Http\Controllers\Admin\CourseController::class);
-    Route::resource('lessons', App\Http\Controllers\Admin\lessonController::class);
+    Route::resource('lessons', App\Http\Controllers\Admin\LessonController::class);
     Route::resource('contents', App\Http\Controllers\Admin\ContentController::class);
     Route::resource('questions', App\Http\Controllers\Admin\QuestionController::class);
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);

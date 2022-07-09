@@ -61,7 +61,7 @@
 </div>
 
 <div class="form-group col-sm-4">
-    {!! Form::label('is_essay', 'Essay:') !!}
+    {!! Form::label('is_essay', 'Code Test:') !!}
     {!! Form::checkbox('is_essay', '1') !!}
 </div>
 
@@ -127,4 +127,3 @@
 
     </script>
 @endsection
-
