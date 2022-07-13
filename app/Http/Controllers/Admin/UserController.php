@@ -92,7 +92,6 @@ class UserController extends Controller
      */
     public function update(Request $request,User $user)
     {
-
         $user->update($request->only('name','email', 'role_id') + ['password' => bcrypt($request->password)]);
         return redirect()->route('admin.users.index');
     }
@@ -105,7 +104,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-      $post =User::where('id',$id)->first();
+      $post =User::where('id', $id)->first();
 
           if ($post != null) {
               $post->delete();
