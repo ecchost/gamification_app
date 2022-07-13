@@ -54,7 +54,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+      $user = User::find($id);
+      $roles = Role::all()->pluck("role", "id")->toArray();
+      // if (empty($lesson)) {
+      //     Flash::error('Lesson not found');
+      //
+      //     return redirect(route('admin.lessons.index'));
+      // }
+      return view('admin.users.show')->with('user', $user)->with("roles", $roles);
     }
 
     /**
@@ -63,11 +70,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        $roles = Role::get()->pluck('title', 'id');
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        $user = User::find($id);
+        $roles = Role::all()->pluck("role", "id")->toArray();
+        // if (empty($lesson)) {
+        //     Flash::error('Lesson not found');
+        //
+        //     return redirect(route('admin.lessons.index'));
+        // }
+        return view('admin.users.edit')->with('user', $user)->with("roles", $roles);
     }
 
     /**
@@ -90,10 +103,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
+      $post =User::where('id',$id)->first();
 
-        return redirect()->route('admin.users.index');
-    }
+          if ($post != null) {
+              $post->delete();
+              return redirect()->route('admin.users.index')->with(['message'=> 'Successfully deleted!!']);
+          }
+
+          return redirect()->route('admin.users.index')->with(['message'=> 'Wrong ID!!']);
+
+        }
 }

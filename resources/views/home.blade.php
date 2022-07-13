@@ -5,12 +5,15 @@
         <div class="alert alert-warning">{{ Session::get("msg_error") }}</div>
     @endif
 
+    @if(Session::has('message'))
+        <div class="alert alert-success">{{ Session::get("message") }}</div>
+    @endif
+
     <section class="section">
     <div class="section-body">
       <h2 class="section-title">Take Your Lesson now</h2>
       <p class="section-lead">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam.
+        Take one of the content materials that have been displayed in the system by pressing the take button.
       </p>
       <!-- Your content goes here -->
     </div>

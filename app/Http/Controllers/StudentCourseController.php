@@ -53,7 +53,8 @@ class StudentCourseController extends Controller
             if($check_course->count()==0){
                 $student_course = StudentCourse::create(["user_id"=>$user_id, "course_id" => $request["course_id"]]);
                 if($student_course->save()){
-                    return redirect("student_course.my_course");
+                  session()->flash('message', 'You success take it');
+                    return redirect()->back();
                 }
             } else {
                 session()->flash('msg_error', 'You already take it');

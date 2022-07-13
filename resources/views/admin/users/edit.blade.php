@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-  Edit Role
+  Edit User
 @endsection
 @section('content')
   <section class="section">
@@ -17,9 +17,9 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body ">
-                {!! Form::model($role, ['route' => ['admin.roles.update', $role->id], 'method' => 'patch']) !!}
+                {!! Form::model($user, ['route' => ['admin.users.update', $user->id], 'method' => 'patch']) !!}
                 <div class="row">
-                  @include('admin.roles.fields')
+                  @include('admin.users.fields')
                 </div>
 
                 {!! Form::close() !!}

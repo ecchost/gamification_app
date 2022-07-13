@@ -103,13 +103,13 @@
               <div class="card">
                 <div class="card-body">
                   <div>
-                    <h3 class="card-title">Code Test</h3>
+                    <h3 class="card-title">Exercise</h3>
                   </div>
                   @foreach ($code_tests as $index => $question)
                     <div>
                       {!! $question->question !!}
                       <a href="{{ route('code_test', ['question_id' => $question->id, 'course_id' => $course->id, 'content_id' => $content->id]) }}"
-                        class="btn btn-primary">Lest Test</a>
+                        class="btn btn-primary">Start</a>
                       {{-- <br><hr /> --}}
                       {{-- <b>write your answer</b> --}}
                       {{-- <button class="btn btn-primary" onclick="runCode('{{ 'sc'.$index }}')">Run</button> --}}
@@ -131,8 +131,8 @@
             @endif
 
             @if (!empty($score))
-              <div class="alert alert-primary">
-                <h3>Your score is: {{ @$score->score }}</h3>
+              <div class="alert alert-success">
+                <h5>Your score is: {{ @$score->score }}</h5>
               </div>
             @endif
           @endif
