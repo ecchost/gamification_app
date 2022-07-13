@@ -102,16 +102,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $data, $id)
     {
-      $post =User::where('id', $id)->first();
 
-          if ($post != null) {
-              $post->delete();
-              return redirect()->route('admin.users.index')->with(['message'=> 'Successfully deleted!!']);
-          }
-
-          return redirect()->route('admin.users.index')->with(['message'=> 'Wrong ID!!']);
-
-        }
+       User::find($id)->delete([
+          'name' => $data->name,
+          'email' => $data->email,
+          'password' => $data->password,
+          'role_id' => $data->role_id,
+      ]);
+      return redirect()->route('admin.users.index')->with(['message'=> 'Successfully deleted!!']);
+    }
 }
+      // $post =User::where('id', $id)->first();
+      //
+      //     if ($post != null) {
+      //         $post->delete();
+      //         return redirect()->route('admin.users.index')->with(['message'=> 'Successfully deleted!!']);
+      //     }
+      //
+      //     return redirect()->route('admin.users.index')->with(['message'=> 'Wrong ID!!']);
+      //
+      //   }
