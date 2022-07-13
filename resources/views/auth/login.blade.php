@@ -1,10 +1,10 @@
 @extends('layouts.auth_app')
 @section('title')
-    Admin Login
+    Bajapro Login
 @endsection
 @section('content')
     <div class="card card-primary">
-        <div class="card-header"><h4>Admin Login</h4></div>
+        <div class="card-header"><h4>Bajapro Login</h4></div>
 
         <div class="card-body">
             <form method="POST" action="{{ route('login') }}">
