@@ -46,15 +46,20 @@
   <section class="section mt-5" id="interactive">
     <div class="row">
       <div class="col-md-8">
+<!-- {{ $content->url_video }} -->
 
         <div>
           <div class="card" style="height: 450px">
-
+            <iframe width="auto" height="450px" src='{{ $content->url_video }}'
+              title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+              clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
           </div>
           @if ($content != null)
             <h2 class="section-title">{{ $content->title }}</h2>
             <div class="section-lead">
               <div>{!! $content->description !!}</div>
+
               <br /><br />
             </div>
 

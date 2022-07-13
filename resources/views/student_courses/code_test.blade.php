@@ -25,7 +25,7 @@
 
       <div class="col-md-5 p-5">
         <div>
-          <h3 class="card-title">Code Test</h3>
+          <h3 class="card-title">Exercise</h3>
           {!! $question->question !!}
         </div><br />
         <div>
