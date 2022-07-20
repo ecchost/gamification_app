@@ -40,6 +40,7 @@
 
 @section('scripts')
   <script src="{{ asset('js/codeflask.min.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <script>
     const flask = new CodeFlask('.editor', {
       language: 'js',
@@ -66,5 +67,64 @@
         alert("fail " + JSON.stringify(data) + " " + JSON.stringify(err));
       });
     }
+
+
+    var target = moment().add('<?= $question->timer ?>', "minutes");
+    var cs = localStorage.getItem("code_session");
+    if (cs == null || cs == undefined || cs !== window.location.href) {
+      localStorage.setItem("code_session", window.location.href);
+      localStorage.setItem("time_end", target)
+    } else {
+      var te = localStorage.getItem("time_end")
+      target = moment(te);
+
+    }
+
+
+
+    var x = setInterval(function() {
+      diff = target.diff(moment());
+      if (diff <= 0) {
+        clearInterval(x);
+        // If the count down is finished, write some text
+        $('#timer').text("TIME OUT");
+        submitCode()
+      } else {
+        $('#timer').text(moment.utc(diff).format("HH:mm:ss"));
+      }
+    }, 1000);
+
+    function submitCode() {
+      var user_id = $("#user_id").val();
+      var question_id = $("#question_id").val();
+      var content_id = $("#content_id").val();
+      var course_id = $("#course_id").val();
+      var score = $("#score").val();
+      var _token = document.getElementsByName("_token")[0].value;
+
+      $.ajax({
+        url: "{{ route('code_test.submit', [$question->id]) }}",
+        method: "post",
+        data: {
+          user_id: user_id,
+          question_id: question_id,
+          content_id: content_id,
+          course_id: course_id,
+          score: score,
+          _token: _token
+        }
+      }).done(res => {
+        clearSession()
+      }).fail(err => {
+        clearSession()
+      })
+    }
+
+    function clearSession() {
+      localStorage.clear()
+      window.location.reload();
+    }
+
+    //console.log(session);
   </script>
 @endsection

@@ -75,7 +75,7 @@
                     @foreach ($questions as $index => $question)
                       @if ($question->is_essay == '0')
                         <div>{{ $index + 1 }}
-                          .{{ $question->question }} {{ $question->is_essay == 1 }}<br />
+                          .{!! $question->question !!}<br />
                           <div class="ml-2">
                             <small>Your answer</small>
                             <br />
