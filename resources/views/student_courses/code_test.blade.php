@@ -119,6 +119,7 @@
         clearSession()
       })
     }
+    // localStorage.clear();
 
     function clearSession() {
       localStorage.clear()
