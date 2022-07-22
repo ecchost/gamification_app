@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\lesson;
+use App\Models\Lesson;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreatelessonAPIRequest extends APIRequest
+class UpdateLessonAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,8 @@ class CreatelessonAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return lesson::$rules;
+        $rules = lesson::$rules;
+
+        return $rules;
     }
 }

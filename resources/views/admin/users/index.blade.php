@@ -11,6 +11,9 @@
             class="fas fa-plus"></i></a>
       </div>
     </div>
+    @if(Session::has('message'))
+        <div class="alert alert-success">{{ Session::get("message") }}</div>
+    @endif
     <div class="section-body">
       <div class="card">
         <div class="card-body">

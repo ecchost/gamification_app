@@ -7,6 +7,7 @@ use App\Models\Content;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\StudentCourse;
+use App\Models\User;
 use App\Models\UserScore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +53,8 @@ class StudentCourseController extends Controller
             if($check_course->count()==0){
                 $student_course = StudentCourse::create(["user_id"=>$user_id, "course_id" => $request["course_id"]]);
                 if($student_course->save()){
-                    return redirect("student_course.my_course");
+                  session()->flash('message', 'You success take it');
+                    return redirect()->back();
                 }
             } else {
                 session()->flash('msg_error', 'You already take it');
@@ -82,6 +84,7 @@ class StudentCourseController extends Controller
             "current_badge" => $current_badge,
             "questions"=>$questions,
             "code_tests"=>$code_test,
+            "percentage" => UserScore::getPercentage()
         ]);
     }
 
