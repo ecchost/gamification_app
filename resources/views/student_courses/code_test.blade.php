@@ -35,6 +35,48 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm Submit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Anda yakin untuk submit?<br />
+          <small>Pastikan anda sudah melakukan run code sebelum submit</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="submitCode()">Submit Pekerjaan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="confirmModal2" tabindex="-1" role="dialog" aria-labelledby="confirmModal2"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm Submit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Waktu anda sudah Habis<br />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="clearSession()">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 
@@ -69,30 +111,35 @@
     }
 
 
-    var target = moment().add('<?= $question->timer ?>', "minutes");
-    var cs = localStorage.getItem("code_session");
-    if (cs == null || cs == undefined || cs !== window.location.href) {
-      localStorage.setItem("code_session", window.location.href);
-      localStorage.setItem("time_end", target)
-    } else {
-      var te = localStorage.getItem("time_end")
-      target = moment(te);
+
+    var is_finish = "{{ $is_finish }}";
+
+    if (is_finish !== "1") {
+      var target = moment().add('<?= $question->timer ?>', "minutes");
+      var cs = localStorage.getItem("code_session");
+      if (cs == null || cs == undefined || cs !== window.location.href) {
+        localStorage.setItem("code_session", window.location.href);
+        localStorage.setItem("time_end", target)
+      } else {
+        var te = localStorage.getItem("time_end")
+        target = moment(te);
+
+      }
+
+      var x = setInterval(function() {
+        diff = target.diff(moment());
+        if (diff <= 0) {
+          clearInterval(x);
+          // If the count down is finished, write some text
+          $('#timer').text("TIME OUT");
+          submitCodeTO()
+          $("#confirmModal2").modal();
+        } else {
+          $('#timer').text(moment.utc(diff).format("HH:mm:ss"));
+        }
+      }, 1000);
 
     }
-
-
-
-    var x = setInterval(function() {
-      diff = target.diff(moment());
-      if (diff <= 0) {
-        clearInterval(x);
-        // If the count down is finished, write some text
-        $('#timer').text("TIME OUT");
-        submitCode()
-      } else {
-        $('#timer').text(moment.utc(diff).format("HH:mm:ss"));
-      }
-    }, 1000);
 
     function submitCode() {
       var user_id = $("#user_id").val();
@@ -120,10 +167,45 @@
       })
     }
 
-    function clearSession() {
-      localStorage.clear()
-      window.location.reload();
+    function submitCodeTO() {
+      var user_id = $("#user_id").val();
+      var question_id = $("#question_id").val();
+      var content_id = $("#content_id").val();
+      var course_id = $("#course_id").val();
+      var score = $("#score").val();
+      var _token = document.getElementsByName("_token")[0].value;
+
+      $.ajax({
+        url: "{{ route('code_test.submit', [$question->id]) }}",
+        method: "post",
+        data: {
+          user_id: user_id,
+          question_id: question_id,
+          content_id: content_id,
+          course_id: course_id,
+          score: score,
+          _token: _token
+        }
+      });
     }
+
+    function clearSession() {
+      try {
+        window.localStorage.removeItem("code_session");
+        window.localStorage.removeItem("time_end");
+      } finally {
+        $("#confirmModal2").modal("hide");
+        $("#confirmModal").modal("hide");
+      }
+    }
+
+    $('#confirmModal2').on('hidden.bs.modal', function(e) {
+      history.back();
+    });
+
+    $('#confirmModal').on('hidden.bs.modal', function(e) {
+      history.back();
+    });
 
     //console.log(session);
   </script>
