@@ -1,7 +1,6 @@
 @extends('layouts.front')
 
 @section('content')
-
   <style>
     .ql-container.ql-snow {
       border: none;

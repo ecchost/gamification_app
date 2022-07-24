@@ -49,6 +49,7 @@
                                 @foreach($leader_board as $leader)
                                     <li class="list-group-item list-group-item-action">
                                         {{ ucfirst($leader->user->name) }}<br />
+                                        <!-- {{  $current_badge->name  }} -->
                                         <small>Total Score : <b>{{ $leader->total_score }}</b></small>
                                     </li>
                                 @endforeach
