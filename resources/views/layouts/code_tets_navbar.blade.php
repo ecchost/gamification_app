@@ -2,7 +2,13 @@
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <button id="run-btn" onclick="runCode()" class="btn-primary btn"><i class="fa fa-play"></i> Run </button>
+        @if (!$is_finish)
+          <button id="run-btn" onclick="runCode()" class="btn-primary btn"><i class="fa fa-play"></i> Run </button>
+        @else
+          <span class="badge badge-primary badge-lg">
+            <b>Score: {{ $score }}</b>
+          </span>
+        @endif
       </li>
     </ul>
     <div class="d-flex">
@@ -14,7 +20,9 @@
         @endif
         <li class="nav-item">
           @if ($is_finish)
-            <b>Score: {{ $score }}</b>
+            <span class="badge badge-success">
+              Duration : {{ $duration }}
+            </span>
           @else
             <form action="{{ route('code_test.submit', [$question->id]) }}" method="post">
               @csrf
