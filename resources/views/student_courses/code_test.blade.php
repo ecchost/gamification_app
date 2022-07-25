@@ -57,6 +57,9 @@
               Duration from {{ $user_score->started_at }} to
               {{ $user_score->ended_at }}
             </span>
+            <span class="badge badge-info">
+              On Timer {{ $user_score->on_timer }}
+            </span>
           </div>
         @endif
 
@@ -168,6 +171,8 @@
 
     var is_finish = "{{ $is_finish }}";
 
+    var current_time = "";
+
     if (is_finish !== "1") {
       var target = moment().add('<?= $question->timer ?>', "minutes");
       var cs = localStorage.getItem("code_session");
@@ -190,7 +195,8 @@
           submitCodeTO()
           $("#confirmModal2").modal();
         } else {
-          $('#timer').text(moment.utc(diff).format("HH:mm:ss"));
+          current_time = moment.utc(diff).format("HH:mm:ss");
+          $('#timer').text(current_time);
         }
       }, 1000);
 
@@ -217,6 +223,7 @@
           score: score,
           started_at: start_time,
           ended_at: end_time,
+          on_timer: current_time,
           _token: _token
         }
       }).done(res => {
@@ -247,6 +254,7 @@
           score: score,
           started_at: start_time,
           ended_at: end_time,
+          on_timer: "00:00:00",
           _token: _token
         }
       });

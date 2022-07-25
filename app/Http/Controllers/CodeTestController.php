@@ -58,6 +58,7 @@ class CodeTestController extends Controller
                     "score" => $request->get('score') == 10 ? $question->score : 0,
                     "started_at" => $request->get("started_at"),
                     "ended_at" => $request->get("ended_at"),
+                    "on_timer" => $request->get("on_timer")
                 ]
             );
 
