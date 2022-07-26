@@ -12,7 +12,7 @@ class UserScore extends Model
     use HasFactory;
 
     protected $table = "user_scores";
-    protected $fillable  = ["user_id", "content_id", "score", "question_id", "started_at", "ended_at"];
+    protected $fillable  = ["user_id", "content_id", "score", "question_id", "started_at", "ended_at", "on_timer"];
 
     public static function getScore()
     {
