@@ -32,6 +32,7 @@ class Question extends Model
     public $fillable = [
         'content_id',
         'question',
+        'question_name',
         'image',
         'score',
         'is_essay',
@@ -47,6 +48,7 @@ class Question extends Model
         'id' => 'integer',
         'content_id' => 'integer',
         'question' => 'string',
+        'question_name' => 'string',
         'image' => 'string',
         'score' => 'integer',
         'is_essay' => 'integer'

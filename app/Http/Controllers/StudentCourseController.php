@@ -43,7 +43,8 @@ class StudentCourseController extends Controller
             "course"=>$course,
             "total_score"=> $total_score,
             "current_badge" => $current_badge,
-            "leader_board" => $leader_board
+            "leader_board" => $leader_board,
+            "percentage" => UserScore::getPercentage()
         ]);
     }
     public function takeCourse(Request $request){

@@ -4,6 +4,15 @@
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group col-sm-6">
+
+          {!! Form::label('name', 'Name:') !!}
+            <div class="fallback">
+              <input name="file" type="file" class="form-control" />
+            </div>
+          </form>
+
+  </div>
 <!-- Min Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('min', 'Min:') !!}

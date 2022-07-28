@@ -34,7 +34,8 @@
 
       data.chart_data.questions.forEach(dt => {
         datasets.push({
-          x: "Question ID " + dt.question_id,
+          // x: "Question ID " +dt.question_name,
+          x: dt.question.question_name,
           y: dt.total
         })
       });

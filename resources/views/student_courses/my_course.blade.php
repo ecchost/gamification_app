@@ -150,6 +150,7 @@
             </h5>
             <div class="alert alert-info">
               Your Badge is <b>{{ $current_badge->name }}</b>
+              <img src="/image_upload/{{ $current_badge->file }}" width="50px"> 
             </div><br />
 
             <div>

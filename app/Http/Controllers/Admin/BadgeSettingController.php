@@ -6,9 +6,11 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateBadgeSettingRequest;
 use App\Http\Requests\UpdateBadgeSettingRequest;
 use App\Repositories\BadgeSettingRepository;
+use App\Models\BadgeSetting;
 use Flash;
 use Illuminate\Http\Request;
 use Response;
+use Illuminate\Support\Facades\File;
 
 class BadgeSettingController extends AppBaseController
 {
@@ -58,6 +60,19 @@ class BadgeSettingController extends AppBaseController
 
         $badgeSetting = $this->badgeSettingRepository->create($input);
 
+        // $path = $badgeSetting->file('file')->store('image_upload', 'assets/images');
+
+        if ($image = $request->file('file')) {
+            $destinationPath = 'image_upload/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['file'] = "$profileImage";
+        }
+
+        BadgeSetting::create($input);
+
+        // Product::create($request->all());
+
         Flash::success('Badge Setting saved successfully.');
 
         return redirect(route('admin.badgeSettings.index'));
@@ -94,6 +109,7 @@ class BadgeSettingController extends AppBaseController
     {
         $badgeSetting = $this->badgeSettingRepository->find($id);
 
+
         if (empty($badgeSetting)) {
             Flash::error('Badge Setting not found');
 
@@ -121,7 +137,17 @@ class BadgeSettingController extends AppBaseController
             return redirect(route('admin.badgeSettings.index'));
         }
 
+        $input = $request->all();
         $badgeSetting = $this->badgeSettingRepository->update($request->all(), $id);
+
+        if ($image = $request->file('file')) {
+            $destinationPath = 'image_upload/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['file'] = "$profileImage";
+        }
+
+        $badgeSetting->update($input);
 
         Flash::success('Badge Setting updated successfully.');
 

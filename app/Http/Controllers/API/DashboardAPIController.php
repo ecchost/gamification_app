@@ -13,10 +13,9 @@ class DashboardAPIController extends AppBaseController
 
     public function getChartData(Request $request)
     {
-        $err_logs = DB::table('code_error_logs')
-            ->select(DB::raw('question_id, count(*) as total'))
+        $err_logs = ErrorCodeLog::select(DB::raw('question_id, count(*) as total'))
             ->groupBy('question_id')
-            ->get();
+            ->with(["question"])->get();
 
         return Response([
             "chart_data" => [

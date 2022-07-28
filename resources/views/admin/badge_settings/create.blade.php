@@ -17,7 +17,7 @@
                    <div class="col-lg-12">
                        <div class="card">
                            <div class="card-body ">
-                                {!! Form::open(['route' => 'admin.badgeSettings.store']) !!}
+                                {!! Form::open(['route' => 'admin.badgeSettings.store', 'enctype' => 'multipart/form-data']) !!}
                                     <div class="row">
                                         @include('admin.badge_settings.fields')
                                     </div>
