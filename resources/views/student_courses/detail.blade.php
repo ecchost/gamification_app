@@ -58,14 +58,11 @@
                                     <th>Badge</th>
                                   </tr>
                                 </thead>
-                                <tr>
-                                  <!-- <td>
-                                    <div class="sort-handler">
-                                      <i class="fas fa-th"></i>
-                                    </div>
-                                  </td> -->
+                              </tbody>
+
                                   <?php $no = 1; ?>
                                   @foreach($leader_board as $leader)
+                                  <tr>
                                   <td> <?= $no ?> </td>
                                   <td> {{ ucfirst($leader->user->name) }} </td>
                                   <td> {{ $leader->total_score }}
@@ -84,6 +81,7 @@
                                   <?php $no += 1; ?>
                                   @endforeach
                                 </tr>
+                              </tbody>
                               </div>
                             </table>
                             <!-- <div class="list-group row list-group-flush">
