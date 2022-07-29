@@ -70,12 +70,12 @@
                                    </td>
                                   <td>
                                     <div class="progress mt-2">
-                                      <div class="progress-bar" role="progressbar" style="width: {{ $percentage }}%;"
-                                        aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">{{ $percentage }}%</div>
+                                      <div class="progress-bar" role="progressbar" style="width: {{ $leader->percentage }}%;"
+                                        aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">{{ $leader->percentage }}%</div>
                                     </div>
                                   </td>
                                   <td>
-                                    {{  $current_badge->name  }}
+                                    {{  $leader->badge_name  }}
                                     <img src="/image_upload/{{ $current_badge->file }}" width="50px">
                                   </td>
                                   <?php $no += 1; ?>
