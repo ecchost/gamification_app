@@ -48,20 +48,23 @@ class StudentCourseController extends Controller
 
         $question = Question::where("is_essay", "1")->pluck("id");
 
-        $lboard=[];
+        $lboard = [];
         foreach ($leader_board as $key => $lead) {
             $answeredQues = UserScore::where("user_id", $lead->user_id)->whereIn("question_id", $question)->count();
             $percentage = number_format((float)$answeredQues / $question->count() * 100, 1, '.', '');
 
-            $getBadge = BadgeSetting::where("name", $lead->badge_name);
+            $badge = BadgeSetting::where("min", "<=", $lead->total_score)->where("max", ">=", $lead->total_score)->first();
+
             $lboard[$key]['user'] = User::find($lead->user_id)->name;
             $lboard[$key]['total_score'] = $lead->total_score;
             $lboard[$key]['percentage'] = $percentage;
-            $lboard[$key]['badge_name'] = $lead->badge_name;
-            $lboard[$key]['file'] = $lead->file;
+            $lboard[$key]['badge_name'] = $badge->name;
+            $lboard[$key]['file'] = $badge->file;
             $lboard[$key]['answered_question'] = $answeredQues;
             $lboard[$key]['code_questions'] = $question->count();
         }
+
+        Log::debug($lboard);
 
         return view("student_courses.detail", [
             "course" => $course,
