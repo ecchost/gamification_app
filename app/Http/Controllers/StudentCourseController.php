@@ -42,21 +42,25 @@ class StudentCourseController extends Controller
         $current_badge = BadgeSetting::where("min", "<=", $total_score)->where("max", ">=", $total_score)->first();
 
         $getBadge = "(SELECT badge_settings.name FROM badge_settings WHERE badge_settings.min <= 'total_score' and badge_settings.max >= 'total_score' LIMIT 1)";
-        $leader_board = UserScore::select(DB::raw("user_id, SUM(score) as total_score, $getBadge as badge_name"))->groupBy("user_id")->orderBy("total_score", "DESC")->get();
+
+        $getBadgeFile = "(SELECT badge_settings.file FROM badge_settings WHERE badge_settings.min <= 'total_score' and badge_settings.max >= 'total_score' LIMIT 1)";
+        $leader_board = UserScore::select(DB::raw("user_id, SUM(score) as total_score, $getBadge as badge_name, $getBadgeFile as file"))->groupBy("user_id")->orderBy("total_score", "DESC")->get();
 
         $question = Question::where("is_essay", "1")->pluck("id");
 
-        $lboard[] = new stdClass;
+        $lboard=[];
         foreach ($leader_board as $key => $lead) {
             $answeredQues = UserScore::where("user_id", $lead->user_id)->whereIn("question_id", $question)->count();
             $percentage = number_format((float)$answeredQues / $question->count() * 100, 1, '.', '');
 
-            $lboard[$key]->user = User::find($lead->user_id);
-            $lboard[$key]->total_score = $lead->total_score;
-            $lboard[$key]->percentage = $percentage;
-            $lboard[$key]->badge_name = $lead->badge_name;
-            $lboard[$key]->answered_question = $answeredQues;
-            $lboard[$key]->code_questions = $question->count();
+            $getBadge = BadgeSetting::where("name", $lead->badge_name);
+            $lboard[$key]['user'] = User::find($lead->user_id)->name;
+            $lboard[$key]['total_score'] = $lead->total_score;
+            $lboard[$key]['percentage'] = $percentage;
+            $lboard[$key]['badge_name'] = $lead->badge_name;
+            $lboard[$key]['file'] = $lead->file;
+            $lboard[$key]['answered_question'] = $answeredQues;
+            $lboard[$key]['code_questions'] = $question->count();
         }
 
         return view("student_courses.detail", [

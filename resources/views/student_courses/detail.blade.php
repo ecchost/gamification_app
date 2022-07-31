@@ -64,19 +64,19 @@
                                   @foreach($leader_board as $leader)
                                   <tr>
                                   <td> <?= $no ?> </td>
-                                  <td> {{ ucfirst($leader->user->name) }} </td>
-                                  <td> {{ $leader->total_score }}
+                                  <td> {{ ucfirst($leader['user']) }} </td>
+                                  <td> {{ $leader['total_score'] }}
                                     <img class="" src="{{ asset('img/pngwing.com.png') }}" width="23px" alt=""/>
                                    </td>
                                   <td>
                                     <div class="progress mt-2">
-                                      <div class="progress-bar" role="progressbar" style="width: {{ $leader->percentage }}%;"
-                                        aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">{{ $leader->percentage }}%</div>
+                                      <div class="progress-bar" role="progressbar" style="width: {{ $leader['percentage'] }}%;"
+                                        aria-valuenow="{{ $leader['percentage'] }}" aria-valuemin="0" aria-valuemax="100">{{ $leader['percentage'] }}%</div>
                                     </div>
                                   </td>
                                   <td>
-                                    {{  $leader->badge_name  }}
-                                    <img src="/image_upload/{{ $current_badge->file }}" width="50px">
+                                    {{  $leader['badge_name']  }}
+                                    <img src="/image_upload/{{ $leader['file'] }}" width="50px">
                                   </td>
                                   <?php $no += 1; ?>
                                   @endforeach
@@ -84,19 +84,7 @@
                               </tbody>
                               </div>
                             </table>
-                            <!-- <div class="list-group row list-group-flush">
-                                @foreach($leader_board as $leader)
-                                    <li class="list-group-item list-group-item-action">
-                                        {{ ucfirst($leader->user->name) }}<br />
-                                        {{  $current_badge->name  }}
-                                        <small>Total Score : <b>{{ $leader->total_score }}</b></small>
-                                        <div class="progress mt-2">
-                                          <div class="progress-bar" role="progressbar" style="width: {{ $percentage }}%;"
-                                            aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">{{ $percentage }}%</div>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </div> -->
+
                         </div>
                     </div>
                 </div>

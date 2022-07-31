@@ -56,6 +56,7 @@
                   </div>
               </div>
           @endforeach
+      </div>
 
   </section>
 @endsection
