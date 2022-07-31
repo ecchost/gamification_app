@@ -51,19 +51,24 @@ class StudentCourseController extends Controller
             $answeredQues = UserScore::where("user_id", $lead->user_id)->whereIn("question_id", $question)->count();
             $percentage = number_format((float)$answeredQues / $question->count() * 100, 1, '.', '');
 
-            $lboard2[$key]['user'] = User::find($lead->user_id)->name;
-            $lboard2[$key]['total_score'] = $lead->total_score;
-            $lboard2[$key]['percentage'] = $percentage;
-            $lboard2[$key]['badge_name'] = $lead->badge_name;
-            $lboard2[$key]['answered_question'] = $answeredQues;
-            $lboard2[$key]['code_questions'] = $question->count();
+            $badge = BadgeSetting::where("min", "<=", $lead->total_score)->where("max", ">=", $lead->total_score)->first();
+
+            $lboard[$key]['user'] = User::find($lead->user_id)->name;
+            $lboard[$key]['total_score'] = $lead->total_score;
+            $lboard[$key]['percentage'] = $percentage;
+            $lboard[$key]['badge_name'] = $badge->name;
+            $lboard[$key]['file'] = $badge->file;
+            $lboard[$key]['answered_question'] = $answeredQues;
+            $lboard[$key]['code_questions'] = $question->count();
         }
+
+        Log::debug($lboard);
 
         return view("student_courses.detail", [
             "course" => $course,
             "total_score" => $total_score,
             "current_badge" => $current_badge,
-            "leader_board" => $lboard2
+            "leader_board" => $lboard
         ]);
     }
     public function takeCourse(Request $request)
