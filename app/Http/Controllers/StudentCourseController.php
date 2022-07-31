@@ -46,24 +46,24 @@ class StudentCourseController extends Controller
 
         $question = Question::where("is_essay", "1")->pluck("id");
 
-        $lboard[] = new stdClass;
+        $lboard = [];
         foreach ($leader_board as $key => $lead) {
             $answeredQues = UserScore::where("user_id", $lead->user_id)->whereIn("question_id", $question)->count();
             $percentage = number_format((float)$answeredQues / $question->count() * 100, 1, '.', '');
 
-            $lboard[$key]->user = User::find($lead->user_id);
-            $lboard[$key]->total_score = $lead->total_score;
-            $lboard[$key]->percentage = $percentage;
-            $lboard[$key]->badge_name = $lead->badge_name;
-            $lboard[$key]->answered_question = $answeredQues;
-            $lboard[$key]->code_questions = $question->count();
+            $lboard2[$key]['user'] = User::find($lead->user_id)->name;
+            $lboard2[$key]['total_score'] = $lead->total_score;
+            $lboard2[$key]['percentage'] = $percentage;
+            $lboard2[$key]['badge_name'] = $lead->badge_name;
+            $lboard2[$key]['answered_question'] = $answeredQues;
+            $lboard2[$key]['code_questions'] = $question->count();
         }
 
         return view("student_courses.detail", [
             "course" => $course,
             "total_score" => $total_score,
             "current_badge" => $current_badge,
-            "leader_board" => $lboard
+            "leader_board" => $lboard2
         ]);
     }
     public function takeCourse(Request $request)
