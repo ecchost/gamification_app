@@ -104,8 +104,14 @@
                   @foreach ($code_tests as $index => $question)
                     <div>
                       {!! $question->question !!}
-                      <a href="{{ route('code_test', ['question_id' => $question->id, 'course_id' => $course->id, 'content_id' => $content->id]) }}"
-                        class="btn btn-primary">Lest Test</a>
+                      @if (in_array($question->id, $finish_code_tests))
+                        <a href="{{ route('code_test', ['question_id' => $question->id, 'course_id' => $course->id, 'content_id' => $content->id]) }}"
+                          class="btn btn-primary">See Result</a>
+                      @else
+                        <a href="{{ route('code_test', ['question_id' => $question->id, 'course_id' => $course->id, 'content_id' => $content->id]) }}"
+                          class="btn btn-primary">Lest Test</a>
+                      @endif
+
                       {{-- <br><hr /> --}}
                       {{-- <b>write your answer</b> --}}
                       {{-- <button class="btn btn-primary" onclick="runCode('{{ 'sc'.$index }}')">Run</button> --}}
