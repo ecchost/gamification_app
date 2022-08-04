@@ -64,8 +64,6 @@ class StudentCourseController extends Controller
             $lboard[$key]['code_questions'] = $question->count();
         }
 
-        Log::debug($lboard);
-
         return view("student_courses.detail", [
             "course" => $course,
             "total_score" => $total_score,
@@ -81,7 +79,8 @@ class StudentCourseController extends Controller
             if ($check_course->count() == 0) {
                 $student_course = StudentCourse::create(["user_id" => $user_id, "course_id" => $request["course_id"]]);
                 if ($student_course->save()) {
-                    return redirect("student_course.my_course");
+                  session()->flash('msg_error1', 'You take it success');
+                    return redirect()->back();
                 }
             } else {
                 session()->flash('msg_error', 'You already take it');
@@ -100,6 +99,7 @@ class StudentCourseController extends Controller
         $current_badge = BadgeSetting::where("min", "<=", $total_score)->where("max", ">=", $total_score)->first();
         $questions = Question::where(["is_essay" => "0", "content_id" => $content_id])->get();
         $code_test = Question::where(["is_essay" => "1", "content_id" => $content_id])->get();
+        $take = UserScore::where("user_id", Auth::id())->pluck("question_id")->toArray();
 
         return view("student_courses.my_course", [
             "course" => $course,
@@ -111,7 +111,8 @@ class StudentCourseController extends Controller
             "current_badge" => $current_badge,
             "questions" => $questions,
             "code_tests" => $code_test,
-            "percentage" => UserScore::getPercentage()
+            "percentage" => UserScore::getPercentage(),
+            "finish_code_tests" => $take
         ]);
     }
 }

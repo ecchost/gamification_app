@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\StudentCourse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -25,6 +28,8 @@ class HomeController extends Controller
     public function index()
     {
         $courses = Course::all();
-        return view('home', ['courses'=> $courses]);
+        $takeCourseIds = StudentCourse::where(["user_id" => Auth::user()->id])->pluck("course_id")->toArray();
+
+        return view('home', ['courses' => $courses, "take_ids" => $takeCourseIds]);
     }
 }
