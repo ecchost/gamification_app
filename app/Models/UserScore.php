@@ -12,21 +12,24 @@ class UserScore extends Model
     use HasFactory;
 
     protected $table = "user_scores";
-    protected $fillable  = ["user_id", "content_id", "score", "question_id"];
+    protected $fillable  = ["user_id", "content_id", "score", "question_id", "started_at", "ended_at", "on_timer"];
 
-    public static function getScore(){
+    public static function getScore()
+    {
         $score =  UserScore::where("user_id", Auth::id())->sum("score");
         return $score;
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public static function getPercentage(){
+    public static function getPercentage()
+    {
         $question = Question::where("is_essay", "1")->pluck("id");
         $answeredQues = UserScore::where("user_id", Auth::id())->whereIn("question_id", $question);
 
-        return number_format((float)$answeredQues->count()/$question->count() * 100, 1, '.', '');
+        return number_format((float)$answeredQues->count() / $question->count() * 100, 1, '.', '');
     }
 }

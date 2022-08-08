@@ -4,6 +4,7 @@
       <tr>
         <th>Content Id</th>
         <th>Question</th>
+        <th>Question Name</th>
         <th>Score</th>
         <th colspan="3">Action</th>
       </tr>
@@ -12,6 +13,7 @@
       @foreach ($questions as $question)
         <tr>
           <td>{{ $question->content->title }}</td>
+          <td>{{ $question->question_name }}</td>
           <td>{{ $question->question }}</td>
           <td>{{ $question->score }}</td>
           <td class=" text-center">

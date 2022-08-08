@@ -17,7 +17,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body ">
-                                {!! Form::model($badgeSetting, ['route' => ['admin.badgeSettings.update', $badgeSetting->id], 'method' => 'patch']) !!}
+                                {!! Form::model($badgeSetting, ['route' => ['admin.badgeSettings.update', $badgeSetting->id], 'method' => 'patch', 'enctype' => 'multipart/form-data']) !!}
                                 <div class="row">
                                     @include('admin.badge_settings.fields')
                                 </div>

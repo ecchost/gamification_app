@@ -12,6 +12,11 @@
   {!! Form::select('content_id', $contents, null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group col-sm-6">
+  {!! Form::label('question_name', 'Question Name:') !!}
+  {!! Form::text('question_name', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Question Field -->
 <div class="form-group col-sm-12">
   {!! Form::label('question', 'Question:') !!}
@@ -61,7 +66,7 @@
 </div>
 
 <div class="form-group col-sm-3">
-  {!! Form::label('is_essay', 'Essay:') !!}
+  {!! Form::label('is_essay', 'Code:') !!}
   {!! Form::checkbox('is_essay', '1') !!}
 </div>
 

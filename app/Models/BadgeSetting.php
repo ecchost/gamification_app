@@ -20,12 +20,13 @@ class BadgeSetting extends Model
 
 
     public $table = 'badge_settings';
-    
+
 
 
 
     public $fillable = [
         'name',
+        'file',
         'min',
         'max'
     ];
@@ -38,6 +39,7 @@ class BadgeSetting extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
+        'file' => 'string',
         'min' => 'integer',
         'max' => 'integer'
     ];
@@ -48,8 +50,8 @@ class BadgeSetting extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

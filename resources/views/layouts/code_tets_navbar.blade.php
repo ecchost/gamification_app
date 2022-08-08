@@ -2,7 +2,13 @@
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <button id="run-btn" onclick="runCode()" class="btn-primary btn"><i class="fa fa-play"></i> Run </button>
+        @if (!$is_finish)
+          <button id="run-btn" onclick="runCode()" class="btn-primary btn"><i class="fa fa-play"></i> Run </button>
+        @else
+          <span class="badge badge-primary badge-lg">
+            <b>Score: {{ $score }}</b>
+          </span>
+        @endif
       </li>
     </ul>
     <div class="d-flex">
@@ -14,17 +20,19 @@
         @endif
         <li class="nav-item">
           @if ($is_finish)
-            <b>Score: {{ $score }}</b>
+            <span class="badge badge-success">
+              Duration : {{ $duration }}
+            </span>
           @else
             <form action="{{ route('code_test.submit', [$question->id]) }}" method="post">
               @csrf
-              <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::id() }}" name="user_id"
-                id="user_id">
+              <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::id() }}" name="user_id" id="user_id">
               <input type="hidden" value="{{ $question->id }}" name="question_id" id="question_id">
               <input type="hidden" value="{{ request()->get('content_id') }}" name="content_id" id="content_id">
               <input type="hidden" value="{{ request()->get('course_id') }}" name="course_id" id="course_id">
               <input type="hidden" value="0" name="score" id="score" id=score>
-              <button type="submit" class="btn-success btn" style="margin-left: 20px"><i class="fa fa-save"></i> Submit
+              <button type="button" class="btn-success btn" style="margin-left: 20px" data-target="#confirmModal"
+                data-toggle="modal" data-target="#confirmModal"><i class="fa fa-save"></i> Submit
               </button>
             </form>
           @endif

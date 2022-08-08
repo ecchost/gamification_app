@@ -19,6 +19,7 @@ class QuestionRepository extends BaseRepository
     protected $fieldSearchable = [
         'content_id',
         'question',
+        'question_name',
         'image',
         'score'
     ];

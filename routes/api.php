@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::post('login', [\App\Http\Controllers\ApiController::class, 'authenticate']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -37,6 +38,9 @@ Route::resource('questions', App\Http\Controllers\API\QuestionAPIController::cla
 Route::get("questions/get_question_answers/{content_id}", [App\Http\Controllers\API\QuestionAPIController::class, "getQuestionAnswer"]);
 Route::post("questions/check_answer", [App\Http\Controllers\API\QuestionAPIController::class, "checkAnswer"]);
 
+Route::post("questions/error_code_log/create", [App\Http\Controllers\ErrorCodeLogController::class, "create"]);
+
+Route::get("dashboard/get_chart_data", [App\Http\Controllers\API\DashboardAPIController::class, "getChartData"]);
 
 
 Route::resource('badge_settings', App\Http\Controllers\API\BadgeSettingAPIController::class);

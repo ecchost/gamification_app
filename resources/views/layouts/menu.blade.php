@@ -1,5 +1,5 @@
 <li class="side-menus {{ Request::is('home') ? 'active' : '' }}">
-  <a class="nav-link" href="/">
+  <a class="nav-link" href="/admin">
     <i class=" fas fa-building"></i><span>Dashboard</span>
   </a>
 </li>
@@ -26,4 +26,3 @@
 <li class="{{ Request::is('badgeSettings*') ? 'active' : '' }}">
     <a href="{{ route('admin.badgeSettings.index') }}"><i class="fa fa-medal"></i><span>Badge Settings</span></a>
 </li>
-

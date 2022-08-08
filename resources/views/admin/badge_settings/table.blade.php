@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Image</th>
         <th>Min</th>
         <th>Max</th>
                 <th colspan="3">Action</th>
@@ -12,6 +13,7 @@
         @foreach($badgeSettings as $badgeSetting)
             <tr>
                        <td>{{ $badgeSetting->name }}</td>
+                       <td><img src="/image_upload/{{ $badgeSetting->file }}" width="100px"></td>
             <td>{{ $badgeSetting->min }}</td>
             <td>{{ $badgeSetting->max }}</td>
                        <td class=" text-center">
