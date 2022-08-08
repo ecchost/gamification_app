@@ -42,6 +42,36 @@
                 </div>
 
                 <div class="mt-1">
+                  <div class="card">
+                    <div class="card-body">
+                      <h3>Achievement Badge</h3>
+                      <div class="table-responsive">
+                        <table class="table table-striped" id="sortable-table">
+                          <thead>
+                            <tr>
+                              <th>Badge Name</th>
+                              <th>Badge Point Min</th>
+                              <th>Badge Point Max</th>
+                            </tr>
+                          </thead>
+                        </tbody>
+                  @foreach($current_badge as $badgeSetting)
+                      <tr>
+                        <td>{{ $badgeSetting->name }} <img src="/image_upload/{{ $badgeSetting->file }}" width="50px"></td>
+                      <td>{{ $badgeSetting->min }}</td>
+                      <td>{{ $badgeSetting->max }}</td>
+                      @endforeach
+                    </tr>
+                  </tbody>
+                  </div>
+                </table>
+                <i>Note: Achievement Badge di peroleh dari point yang diperoleh</i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+                <div class="mt-1">
                     <div class="card">
                         <div class="card-body">
                             <h3>Leader Board</h3>

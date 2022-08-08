@@ -13,7 +13,7 @@
 <!-- Question Field -->
 <div class="form-group">
     {!! Form::label('question', 'Question:') !!}
-    <p>{{ $question->question }}</p>
+    <p>{{!! $question->question !!}}</p>
 </div>
 
 <!-- Image Field -->

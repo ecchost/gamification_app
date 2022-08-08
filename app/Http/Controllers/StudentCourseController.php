@@ -39,8 +39,8 @@ class StudentCourseController extends Controller
     {
         $course = Course::find($course_id);
         $total_score = UserScore::where("user_id", Auth::id())->sum("score");
-        $current_badge = BadgeSetting::where("min", "<=", $total_score)->where("max", ">=", $total_score)->first();
-
+        $current_badge = BadgeSetting::all();
+$fullbadge = BadgeSetting::all();
         $getBadge = "(SELECT badge_settings.name FROM badge_settings WHERE badge_settings.min <= 'total_score' and badge_settings.max >= 'total_score' LIMIT 1)";
 
         $getBadgeFile = "(SELECT badge_settings.file FROM badge_settings WHERE badge_settings.min <= 'total_score' and badge_settings.max >= 'total_score' LIMIT 1)";
@@ -115,4 +115,5 @@ class StudentCourseController extends Controller
             "finish_code_tests" => $take
         ]);
     }
+
 }
