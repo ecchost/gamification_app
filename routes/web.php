@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::resource('badgeSettings', \App\Http\Controllers\Admin\BadgeSettingController::class);
 });
 
-Route::group(['middleware' => ["auth"]], function(){
+Route::group(['middleware' => ["auth"]], function () {
     Route::get("/courses/my_course", [\App\Http\Controllers\StudentCourseController::class, "index"])->name("student_course.my_course");
     Route::post("/take_course", [\App\Http\Controllers\StudentCourseController::class, "takeCourse"])->name("student_course.take");
     Route::get("/courses/my_course/{course_id}", [\App\Http\Controllers\StudentCourseController::class, "my_course"])->name("student_course.my_course.detail");
@@ -41,6 +41,7 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get("/courses/detail/{course_id}", [\App\Http\Controllers\StudentCourseController::class, "detail"])->name("student_course.detail");
     Route::get("/courses/code_test/{question_id}", [\App\Http\Controllers\CodeTestController::class, "index"])->name("code_test");
     Route::post("/courses/code_test/{question_id}/submit", [\App\Http\Controllers\CodeTestController::class, "codeTestSubmit"])->name("code_test.submit");
+    Route::get("/courses/report", [\App\Http\Controllers\StudentCourseController::class, "report"])->name("student_course.report");
 });
 
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
@@ -58,3 +59,4 @@ Route::post(
     '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
 )->name('io_generator_builder_generate_from_file');
 
+Route::get("/admin/report/{user_id?}", [\App\Http\Controllers\Admin\DashboardController::class, "report"])->name("admin.dashboard.report");

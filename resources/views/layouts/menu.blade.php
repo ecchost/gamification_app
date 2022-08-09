@@ -23,7 +23,11 @@
 <li class="{{ Request::is('questions*') ? 'active' : '' }}">
   <a href="{{ route('admin.users.index') }}"><i class="fa fa-user-circle"></i><span>Users</span></a>
 </li>
-<li class="{{ Request::is('badgeSettings*') ? 'active' : '' }}">
-    <a href="{{ route('admin.badgeSettings.index') }}"><i class="fa fa-medal"></i><span>Badge Settings</span></a>
+
+<li class="{{ Request::is('report*') ? 'active' : '' }}">
+  <a href="{{ route('admin.dashboard.report') }}"><i class="fa fa-user-circle"></i><span>Report</span></a>
 </li>
 
+<li class="{{ Request::is('badgeSettings*') ? 'active' : '' }}">
+  <a href="{{ route('admin.badgeSettings.index') }}"><i class="fa fa-medal"></i><span>Badge Settings</span></a>
+</li>
