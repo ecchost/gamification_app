@@ -40,6 +40,7 @@ class DashboardController extends Controller
             $total_score = UserScore::where("user_id", $user_id)->sum("score");
             $current_badge = BadgeSetting::where("min", "<=", $total_score)->where("max", ">=", $total_score)->first();
             $take = UserScore::where("user_id", $user_id)->pluck("question_id")->toArray();
+            $code_test_score = UserScore::where(["user_id" => $user_id])->whereNotNull("question_id")->get();
 
             return view("admin.dashboard.report", [
                 "score" => $user_score,
@@ -48,7 +49,8 @@ class DashboardController extends Controller
                 "percentage" => UserScore::getPercentage($user_id),
                 "finish_code_tests" => $take,
                 "user_id" => $user_id,
-                "users" => $users
+                "users" => $users,
+                "code_score" => $code_test_score
             ]);
         }
 

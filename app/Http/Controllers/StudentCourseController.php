@@ -123,13 +123,15 @@ $fullbadge = BadgeSetting::all();
         $total_score = UserScore::where("user_id", Auth::id())->sum("score");
         $current_badge = BadgeSetting::where("min", "<=", $total_score)->where("max", ">=", $total_score)->first();
         $take = UserScore::where("user_id", Auth::id())->pluck("question_id")->toArray();
+        $code_test_score = UserScore::where(["user_id" => Auth::id()])->whereNotNull("question_id")->get();
 
         return view("student_courses.report", [
             "score" => $user_score,
             "total_score" => $total_score,
             "current_badge" => $current_badge,
             "percentage" => UserScore::getPercentage(),
-            "finish_code_tests" => $take
+            "finish_code_tests" => $take,
+            "code_score" => $code_test_score
         ]);
     }
 }
