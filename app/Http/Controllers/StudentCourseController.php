@@ -116,4 +116,20 @@ $fullbadge = BadgeSetting::all();
         ]);
     }
 
+    public function report()
+    {
+
+        $user_score = UserScore::where(["user_id" => Auth::id()])->get();
+        $total_score = UserScore::where("user_id", Auth::id())->sum("score");
+        $current_badge = BadgeSetting::where("min", "<=", $total_score)->where("max", ">=", $total_score)->first();
+        $take = UserScore::where("user_id", Auth::id())->pluck("question_id")->toArray();
+
+        return view("student_courses.report", [
+            "score" => $user_score,
+            "total_score" => $total_score,
+            "current_badge" => $current_badge,
+            "percentage" => UserScore::getPercentage(),
+            "finish_code_tests" => $take
+        ]);
+    }
 }
