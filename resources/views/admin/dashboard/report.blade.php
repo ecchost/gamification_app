@@ -61,7 +61,7 @@
         </div><br />
 
         <h3>Code Test Report</h3>
-        @foreach ($score as $sc)
+        @foreach ($code_score as $sc)
           <div class="row mb-1">
             <div class="col-md-12">
               @php
