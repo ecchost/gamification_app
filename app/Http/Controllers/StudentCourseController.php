@@ -39,8 +39,8 @@ class StudentCourseController extends Controller
     {
         $course = Course::find($course_id);
         $total_score = UserScore::where("user_id", Auth::id())->sum("score");
-        $current_badge = BadgeSetting::where("min", "<=", $total_score)->where("max", ">=", $total_score)->first();
-
+        $current_badge = BadgeSetting::all();
+$fullbadge = BadgeSetting::all();
         $getBadge = "(SELECT badge_settings.name FROM badge_settings WHERE badge_settings.min <= 'total_score' and badge_settings.max >= 'total_score' LIMIT 1)";
 
         $getBadgeFile = "(SELECT badge_settings.file FROM badge_settings WHERE badge_settings.min <= 'total_score' and badge_settings.max >= 'total_score' LIMIT 1)";
@@ -131,5 +131,23 @@ class StudentCourseController extends Controller
             }
 
         }
+    }
+    public function report()
+    {
+
+        $user_score = UserScore::where(["user_id" => Auth::id()])->get();
+        $total_score = UserScore::where("user_id", Auth::id())->sum("score");
+        $current_badge = BadgeSetting::where("min", "<=", $total_score)->where("max", ">=", $total_score)->first();
+        $take = UserScore::where("user_id", Auth::id())->pluck("question_id")->toArray();
+        $code_test_score = UserScore::where(["user_id" => Auth::id()])->whereNotNull("question_id")->get();
+
+        return view("student_courses.report", [
+            "score" => $user_score,
+            "total_score" => $total_score,
+            "current_badge" => $current_badge,
+            "percentage" => UserScore::getPercentage(),
+            "finish_code_tests" => $take,
+            "code_score" => $code_test_score
+        ]);
     }
 }

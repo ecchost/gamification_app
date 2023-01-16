@@ -25,10 +25,12 @@ class UserScore extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function getPercentage()
+    public static function getPercentage($user_id = null)
     {
+        $user = !empty($user_id) ? $user_id : Auth::id();
+
         $question = Question::where("is_essay", "1")->pluck("id");
-        $answeredQues = UserScore::where("user_id", Auth::id())->whereIn("question_id", $question);
+        $answeredQues = UserScore::where("user_id", $user)->whereIn("question_id", $question);
 
         return number_format((float)$answeredQues->count() / $question->count() * 100, 1, '.', '');
     }

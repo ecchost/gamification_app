@@ -14,7 +14,7 @@
         <tr>
           <td>{{ $question->content->title }}</td>
           <td>{{ $question->question_name }}</td>
-          <td>{{ $question->question }}</td>
+          <td>{{!! $question->question !!}}</td>
           <td>{{ $question->score }}</td>
           <td class=" text-center">
             {!! Form::open(['route' => ['admin.questions.destroy', $question->id], 'method' => 'delete']) !!}
